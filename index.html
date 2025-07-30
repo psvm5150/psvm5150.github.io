@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <!-- main-config.json: site_title -->
+    <title></title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- main-config.json: site_title -->
+                <div class="site-title"></div>
+                <div class="header-main">
+                    <!-- main-config.json: main_title -->
+                    <h1></h1>
+                    <!-- main-config.json: main_subtitle -->
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="view-controls">
+                    <select id="viewModeSelect" class="view-mode-select">
+                        <option value="category" data-i18n="lbl_category_view">Category View</option>
+                        <option value="all" data-i18n="lbl_all_view">All View</option>
+                    </select>
+                </div>
+                <div class="posts-container" id="postsContainer">
+                    <div class="loading" data-i18n="msg_loading_documents_main">📚 Loading document list...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <!-- main-config.json: copyright_text -->
+            <p></p>
+            <div class="footer-controls">
+                <!-- main-config.json: show_theme_toggle -->
+                <button id="darkmode-toggle" class="darkmode-toggle"></button>
+                <!-- main-config.json: home_button_label -->
+                <a href="/" class="home-button"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/common.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
