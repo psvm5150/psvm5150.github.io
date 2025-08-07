@@ -277,24 +277,98 @@ async function generateTableOfContents(contentDiv, markdown, filePath) {
     const actualHeadings = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
     let tocIndex = 0;
 
-    actualHeadings.forEach((element, index) => {
-        // 첫 번째 h1 또는 h2는 메인 타이틀이므로 건너뛰기
-        if (index === 0 && (element.tagName === 'H1' || element.tagName === 'H2')) {
-            return;
+    // TOC 헤딩과 매칭하되, 실패 시 순차적 매칭으로 폴백
+    let unmatchedHeadings = [];
+    
+    // 첫 번째 시도: 정확한 텍스트와 레벨 매칭
+    tocHeadings.forEach((tocHeading) => {
+        let matched = false;
+        // DOM에서 해당 텍스트를 가진 헤딩 요소 찾기
+        for (let i = 0; i < actualHeadings.length; i++) {
+            const element = actualHeadings[i];
+            const elementText = element.textContent.trim();
+            const expectedLevel = tocHeading.level;
+            const actualLevel = parseInt(element.tagName.substring(1));
+            
+            // 텍스트와 레벨이 모두 일치하는 헤딩에 ID 할당
+            if (elementText === tocHeading.text && actualLevel === expectedLevel && !element.id) {
+                element.id = `toc-${tocIndex}`;
+                tocIndex++;
+                matched = true;
+                break;
+            }
         }
-
-        if (tocIndex < tocHeadings.length) {
-            element.id = `toc-${tocIndex}`;
-            tocIndex++;
+        
+        // 매칭되지 않은 헤딩은 나중에 순차적으로 처리
+        if (!matched) {
+            unmatchedHeadings.push(tocHeading);
         }
     });
+    
+    // 두 번째 시도: 매칭되지 않은 헤딩들을 순차적으로 할당
+    if (unmatchedHeadings.length > 0) {
+        let availableHeadings = Array.from(actualHeadings).filter(h => !h.id);
+        let fallbackIndex = 0;
+        
+        unmatchedHeadings.forEach((tocHeading) => {
+            if (fallbackIndex < availableHeadings.length) {
+                availableHeadings[fallbackIndex].id = `toc-${tocIndex}`;
+                tocIndex++;
+                fallbackIndex++;
+            }
+        });
+    }
 
-    // 메인 타이틀 다음에 목차 삽입
+    // 메인 타이틀 다음에 목차와 문서 메타 정보 삽입
     if (mainTitle) {
         const firstHeading = contentDiv.querySelector('h1, h2');
         if (firstHeading) {
+            // 목차 먼저 삽입
             firstHeading.insertAdjacentHTML('afterend', tocHtml);
+            // 그 다음 문서 메타 정보 삽입 (목차 위에 나타나게 됨)
+            const metaHtml = await generateDocumentMeta();
+            if (metaHtml) {
+                firstHeading.insertAdjacentHTML('afterend', metaHtml);
+            }
         }
+    }
+}
+
+// 문서 메타 정보 생성
+async function generateDocumentMeta() {
+    try {
+        const config = await loadViewerConfig();
+        
+        // 작성자 정보가 없으면 메타 정보를 표시하지 않음
+        if (!config.global_author) {
+            return null;
+        }
+
+        // 현재 날짜를 작성일로 사용 (브라우저 언어 설정에 따라 포맷)
+        const creationDate = new Date();
+        const formattedDate = creationDate.toLocaleDateString(navigator.language, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        const metaHtml = `
+            <div class="document-meta">
+                <div class="document-meta-item">
+                    <span class="document-meta-label">${t('lbl_author')}:</span>
+                    <span class="document-meta-value">${config.global_author}</span>
+                </div>
+                <div class="document-meta-item">
+                    <span class="document-meta-label">${t('lbl_creation_date')}:</span>
+                    <span class="document-meta-value">${formattedDate}</span>
+                </div>
+            </div>
+        `;
+
+        return metaHtml;
+    } catch (error) {
+        console.error('Error generating document meta:', error);
+        return null;
     }
 }
 

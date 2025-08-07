@@ -129,19 +129,19 @@ body {
 .auto-toc {
     background: #f8f9fa;
     border: 1px solid #e9ecef;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin: 2rem 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
 .toc-title {
-    margin: 0 0 1rem 0;
-    font-size: 1.2rem;
+    margin: 0 0 0.75rem 0;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #24292e;
-    border-bottom: 2px solid #e9ecef;
-    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.4rem;
 }
 
 .toc-list {
@@ -151,7 +151,7 @@ body {
 }
 
 .toc-item {
-    margin: 0.3rem 0;
+    margin: 0.15rem 0;
     line-height: 1.5;
 }
 
@@ -189,19 +189,47 @@ body {
 }
 
 .toc-indent-1 .toc-link {
+    font-size: 1rem;
+    color: #0366d6;
+}
+
+.toc-indent-2 .toc-link {
     font-size: 0.95rem;
     color: #586069;
 }
 
-.toc-indent-2 .toc-link {
+.toc-indent-3 .toc-link,
+.toc-indent-4 .toc-link {
     font-size: 0.9rem;
     color: #6a737d;
 }
 
-.toc-indent-3 .toc-link,
-.toc-indent-4 .toc-link {
+/* 문서 메타 정보 스타일 */
+.document-meta {
+    padding: 0;
+    margin: 0.125rem 0;
     font-size: 0.85rem;
     color: #6a737d;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    min-height: 1.875rem;
+    justify-content: flex-end;
+}
+
+.document-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.document-meta-label {
+    font-weight: 600;
+    color: #24292e;
+}
+
+.document-meta-value {
+    color: #586069;
 }
 
 /* 다크모드 스타일 */
@@ -317,7 +345,7 @@ body {
 .darkmode .auto-toc {
     background: #21262d;
     border-color: #30363d;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 .darkmode .toc-title {
@@ -335,16 +363,29 @@ body {
 }
 
 .darkmode .toc-indent-1 .toc-link {
-    color: #8b949e;
+    color: #58a6ff;
 }
 
 .darkmode .toc-indent-2 .toc-link {
-    color: #7d8590;
+    color: #8b949e;
 }
 
 .darkmode .toc-indent-3 .toc-link,
 .darkmode .toc-indent-4 .toc-link {
     color: #7d8590;
+}
+
+/* 다크모드 문서 메타 정보 스타일 */
+.darkmode .document-meta {
+    color: #8b949e;
+}
+
+.darkmode .document-meta-label {
+    color: #e6edf3;
+}
+
+.darkmode .document-meta-value {
+    color: #8b949e;
 }
 
 /* 반응형 디자인 */
