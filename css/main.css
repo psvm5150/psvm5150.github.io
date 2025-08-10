@@ -77,6 +77,32 @@ body {
     margin-bottom: 8px;
 }
 
+/* Pagination */
+.pagination {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+}
+.pagination button {
+    background: white;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #2c3e50;
+    cursor: pointer;
+}
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.pagination .page-info {
+    font-size: 14px;
+    color: #656d76;
+}
+
 .view-mode-select {
     background: white;
     border: 1px solid #d0d7de;
@@ -465,26 +491,6 @@ body {
     color: #8b949e;
 }
 
-.darkmode .footer {
-    background: #21262d;
-}
-
-.darkmode .footer p {
-    color: #7d8590;
-}
-
-.darkmode .home-button {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-}
-
-.darkmode .home-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    color: white;
-    transform: translateY(-2px);
-}
 
 /* Dark Mode Toggle Button */
 .darkmode-toggle {
@@ -521,9 +527,9 @@ body {
     gap: 0;
 }
 
-/* Responsive Dark Mode */
+/* Responsive Footer Controls (theme-invariant) */
 @media (max-width: 768px) {
-    .darkmode .footer-controls {
+    .footer-controls {
         flex-direction: column;
         gap: 12px;
     }
