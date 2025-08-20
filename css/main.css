@@ -183,11 +183,11 @@ body {
 @supports (-webkit-touch-callout: none) {
     @media (max-width: 768px) {
         .view-controls .rss-link {
-            padding: 4px 10px;
+            padding: 8px 10px;
         }
         .view-controls .rss-link svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
         }
     }
 }
