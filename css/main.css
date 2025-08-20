@@ -172,7 +172,7 @@ body {
 }
 @media (max-width: 480px) {
     .view-controls .rss-link {
-        padding: 7px 10px;
+        padding: 9px 10px;
     }
     .view-controls .rss-link svg {
         width: 12px;
