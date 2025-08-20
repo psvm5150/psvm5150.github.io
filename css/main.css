@@ -155,8 +155,8 @@ body {
 }
 /* Ensure the RSS icon does not force taller height than the select */
 .view-controls .rss-link svg {
-    width: 19px;
-    height: 20px;
+    width: 20px;
+    height: 21px;
     flex-shrink: 0;
 }
 
