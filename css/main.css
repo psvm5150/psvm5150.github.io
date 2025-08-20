@@ -172,18 +172,18 @@ body {
 }
 @media (max-width: 480px) {
     .view-controls .rss-link {
-        padding: 6px 10px;
+        padding: 4px 10px;
     }
     .view-controls .rss-link svg {
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
     }
 }
 /* iOS Safari specific tweak to better match native select height */
 @supports (-webkit-touch-callout: none) {
     @media (max-width: 768px) {
         .view-controls .rss-link {
-            padding: 8px 10px;
+            padding: 4px 10px;
         }
         .view-controls .rss-link svg {
             width: 14px;
